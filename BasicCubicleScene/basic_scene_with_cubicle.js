@@ -1,6 +1,8 @@
 // Script is run only when document is loaded.
 $(document).ready(function() {
 
+//Comment at 6.04pm DDeery
+
 // Initial variables 
 var stats = initStats();
 
