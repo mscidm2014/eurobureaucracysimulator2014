@@ -1,0 +1,134 @@
+<!doctype html>
+
+<html>
+<head>
+<title>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript "src="three.min.js"></script>
+<script type="text/javascript" src="PointerLockControlsModified.js"></script>
+<script type="text/javascript" src="dat.gui.js"></script>
+<script type="text/javascript" src="stats.min.js"></script>
+<script type="text/javascript" src="physijs/physi.js"></script>
+
+<script type="text/javascript">
+$(document).ready( function (){
+	function init() {
+		scene = new Physijs.Scene(); // create Physijs scene
+		scene.setGravity(new THREE.Vector3( 0, -1150, 0 )); // set gravity
+		scene.addEventListener('update', function() {
+			scene.simulate(); // simulate on every scene update
+		});
+
+		camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 20000);
+		camera.lookAt(scene.position);
+		scene.add(camera);
+
+		var ambiColor = "#0c0c0c";
+   		var ambientLight = new THREE.AmbientLight(ambiColor);
+   		scene.add(ambientLight);
+
+   		var hemiLight = new THREE.HemisphereLight(0x0000ff, 0x00ff00, 0.6);
+  		hemiLight.position.set(0, 500, 0);
+   		scene.add(hemiLight);
+
+   		planeGeometry = new THREE.PlaneGeometry(2000,2000);
+		planeGeometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
+		planeMaterial = new THREE.MeshBasicMaterial({color:0xcccccc},
+		friction = 0.8, 
+		restitution = 0.3);
+
+		plane = new Physijs.PlaneMesh(planeGeometry,planeMaterial, 0);
+		plane.receiveShadow = true;
+		scene.add(plane);
+
+		renderer = new THREE.WebGLRenderer();
+		renderer.setClearColor(0xEEEEEE);
+		renderer.setSize(window.innerWidth, window.innerHeight);
+
+		document.body.appendChild(renderer.domElement);
+
+	}
+
+	function generateCube() {
+		for (var x = 0; x < 10; x++;) {
+			var cubeGeometry = new THREE.BoxGeometry(100,100,100);
+		
+			var cubeMaterial = Physijs.createMaterial(
+			new THREE.MeshNormalMaterial(),
+			friction = 0.8,
+			restitution = .3);
+		
+			var physijsCube = new Physijs.BoxMesh(cubeGeometry,cubeMaterial);
+		
+			physijsCube.position.set(
+				Math.random() * 15 - 7.5, 25,
+				Math.random() * 15 - 7.5
+				);
+		
+			physijsCube.rotation.set(
+				Math.random() * Math.PI,
+				Math.random() * Math.PI,
+				Math.random() * Math.PI
+				);
+				
+			scene.add(physijsCube);
+
+			if (x === 5) {
+				physijsCube.addEventListener('keydown', moveCube);
+			}
+		}
+	}
+
+	function moveCube(evt) {
+
+	var keyCode = parseInt(evt.which);
+	
+	switch(keyCode) {
+		// When 'w' key is pressed, move forward
+		case 119:
+			physijsCube.position.z -= 1;
+		break
+		// When 'a' key is pressed, move left
+		case 97:
+			physijsCube.position.x -= 1;
+		break
+		// When 's' key is pressed, move back
+		case 115:
+			physijsCube.position.z += 1;
+		// When 'd' key is pressed, move right
+		case 100:
+			physijsCube.position.x += 1;
+		}
+	}
+
+	function renderScene() {
+		scene.simulate();
+		requestAnimationFrame(renderScene);
+		renderer.render(scene, camera);
+	}
+
+init();
+renderScene();
+});
+
+</script>
+
+</head>
+
+<body>
+
+	<div id="container">
+		<div id="instructions">
+		<span style="font-size:40px">Click anywhere to play</span>
+		<br />
+		W, A, S, D to move, mouse to look around, spacebar to jump!
+		</div>
+	</div>
+
+	<div id="statsOutput"></div>
+
+</body>
+
+</html>
+
