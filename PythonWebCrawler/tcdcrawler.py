@@ -14,7 +14,32 @@ soup = BeautifulSoup(page)
 
 section = soup.find("span", id = "Verbs").parent
 
-verbs = section.find_next("ul").find_all("li")
+#verbs = section.find_next("ul").find_all("li")
+#verbs = soup.findAll("ul")
+#print(verbs)
+
+verbs = []
+
+uls = soup.findAll("ul")
+
+#print(counter)
+
+#nouns = soup.find_all(id = "Nouns")
+#print(nouns)
+
+for ul in uls:
+    for li in ul.findAll("li"):
+        verbs = verbs + [li]
+
+#nounSection = soup.findAll("h2")[2]
+#nounSection = soup.find("span", id = "Nouns").parent.next_sibling.next_sibling
+#print(nounSection)
+
+#nouns = nounSection.findAll("ul")
+#print(nouns)
+
+#for li in verbs:
+#    print(li)
 
 tidiedVerbs = []
 
@@ -27,7 +52,7 @@ for item in verbs:
                 colonHead, colonSep, colonTail = text.partition(" :")
                 text = dashHead
         elif "<" in item:
-                 print(text)
+                 #print(text)
                  colonHead, colonSep, colonTail = text.partition("<")
                  text = dashHead
 
@@ -35,11 +60,9 @@ for item in verbs:
         tidiedVerbs = tidiedVerbs + [text]
 
 
-
-
 def getSearchResult(verbs):
     searchTerms = []
-    print(len(verbs))
+    #print(len(verbs))
     for item in verbs:
         searchQuery = item
         
@@ -61,16 +84,20 @@ def getSearchResult(verbs):
 
 
 def parseSearchResult(search):
+    counter = 0
     for item in search:
-            soup = BeautifulSoup(item, "xml")
+            soup = BeautifulSoup(item, "xml", from_encoding="utf-8")
             listOfSearchResults = soup.findAll("S")
-
+            textFile = open("output2.txt", "a")
+            textFile.write(tidiedVerbs[counter] + "\n\n")
+            counter = counter + 1
 
             for item in listOfSearchResults:
                text = item.get_text()
-               textFile = open("output.txt", "a")
                textFile.write(text + "\n\n")
-               textFile.close()
+
+
+    textFile.close()
 
     
 
