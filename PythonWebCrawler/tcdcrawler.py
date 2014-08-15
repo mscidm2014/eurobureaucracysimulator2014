@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
+import lxml
 
 searchList = []
 tidiedSearchList = []
@@ -69,15 +70,15 @@ def parseSearchResult(search):
 
     counter = 0
     for item in search:
-            soup = BeautifulSoup(item, "xml", from_encoding="UTF-8")
+            soup = BeautifulSoup(item, "xml")
             listOfSearchResults = soup.findAll("S")
             textFile = open("output3.txt", "a")
-            textFile.write(tidiedVerbs[counter] + "\n\n")
+            textFile.write(tidiedSearchList[counter] + "\n")
             counter = counter + 1
 
             for item in listOfSearchResults:
                text = item.get_text()
-               textFile.write(text + "\n\n")
+               textFile.write(text + "\n")
 
 
     textFile.close()
