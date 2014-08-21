@@ -46,6 +46,15 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Dialogue System Assets\Dialogue System\_Scripts\NPC_firstPerson.js" />
+     <Compile Include="Assets\Dialogue System Assets\Dialogue System\_Scripts\NPC_firstPerson_modified.js" />
+     <Compile Include="Assets\Dialogue System Assets\Dialogue System\_Scripts\NPC_inventory.js" />
+     <Compile Include="Assets\Dialogue System Assets\Dialogue System\_Scripts\NPC_thirdPerson.js" />
+     <Compile Include="Assets\Dialogue System Assets\Dialogue System\_Scripts\NPC_thirdPerson_clickToChat.js" />
+     <Compile Include="Assets\Dialogue System Assets\Dialogue System\_Scripts\NPC_thirdPerson_clickToChat_modified.js" />
+     <Compile Include="Assets\Dialogue System Assets\Dialogue System\_Scripts\NPC_thirdPerson_clickToChat_shop.js" />
+     <Compile Include="Assets\Dialogue System Assets\Dialogue System\_Scripts\PauseMenu.js" />
+     <Compile Include="Assets\Scripts\ConversationTrigger.js" />
      <Compile Include="Assets\Scripts\ConvoTrigger.js" />
      <Compile Include="Assets\Scripts\CubicleLogic.js" />
      <Compile Include="Assets\Scripts\CubicleRotation.js" />
@@ -54,14 +63,50 @@
      <Compile Include="Assets\Scripts\LevelHandlerScript.js" />
      <Compile Include="Assets\Scripts\LudoAudio.js" />
      <Compile Include="Assets\Scripts\LudoMovement.js" />
+     <Compile Include="Assets\Scripts\OnMouseEnterTest.js" />
      <Compile Include="Assets\Scripts\QuestNPCConversations.js" />
      <Compile Include="Assets\Scripts\RandomReadFromWebScraper.js" />
-     <Compile Include="Assets\Scripts\SceneFadeInOut.js" />
+     <Compile Include="Assets\Scripts\wordwrap.js" />
+     <Compile Include="Assets\Scripts\wordwrap1.js" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Depth Cutout.shader" />
+     <None Include="Assets\NGUI\Examples\Models\Orc\Orc Skin.shader" />
+     <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo20.txt" />
+     <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo14.txt" />
+     <None Include="Assets\Dialogue System Assets\Read Me_Dialogue System.txt" />
+     <None Include="Assets\NGUI\Resources\Shaders\GUI - Text Shader (SoftClip).shader" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Dynamic Font (AlphaClip).shader" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Masked Colored.shader" />
+     <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo18.txt" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (Packed) (AlphaClip) .shader" />
+     <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Header.txt" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored (AlphaClip).shader" />
      <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (AlphaClip).shader" />
+     <None Include="Assets\NGUI\Resources\Shaders\GUI - Text Shader (AlphaClip).shader" />
      <None Include="Assets\output3.txt" />
+     <None Include="Assets\NGUI\Examples\Atlases\Fantasy\Fantasy Font - Normal.txt" />
+     <None Include="Assets\NGUI\Examples\Atlases\Refractive\Refractive Font - Normal.txt" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Dynamic Font (SoftClip).shader" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (Packed) (SoftClip).shader" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored (SoftClip).shader" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored.shader" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Dynamic Font.shader" />
+     <None Include="Assets\NGUI\ReadMe - 2.7.0.txt" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored.shader" />
      <None Include="Assets\output2.txt" />
+     <None Include="Assets\NGUI\Examples\Other\English.txt" />
+     <None Include="Assets\NGUI\Examples\Other\French.txt" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (Packed).shader" />
+     <None Include="Assets\Dialogue System Assets\Dialogue System\Shaders\3D Text Shader.shader" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Additive Colored.shader" />
+     <None Include="Assets\NGUI\Examples\Atlases\Refractive\Refractive Font - Header.txt" />
+     <None Include="Assets\NGUI\Examples\Shaders\Refractive.shader" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Depth.shader" />
+     <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Normal.txt" />
+     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (SoftClip).shader" />
+     <None Include="Assets\NGUI\Examples\Models\Orc Armor\Orc Armor.shader" />
  <Reference Include="Assembly-UnityScript-firstpass">
- <HintPath>/Users/katie/donoflizards.github.io/eurobureaucracysimulator2014/BureauDemo/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
+ <HintPath>/Users/katie/Documents/BureauDemo/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
