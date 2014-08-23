@@ -60,6 +60,7 @@
      <Compile Include="Assets\Scripts\CubicleRotation.js" />
      <Compile Include="Assets\Scripts\CubicleTags.js" />
      <Compile Include="Assets\Scripts\GameTime.js" />
+     <Compile Include="Assets\Scripts\InitialVariables.js" />
      <Compile Include="Assets\Scripts\LevelHandlerScript.js" />
      <Compile Include="Assets\Scripts\LudoAudio.js" />
      <Compile Include="Assets\Scripts\LudoMovement.js" />
