@@ -8,7 +8,7 @@ var toggleColorChange:boolean;
 var textures:GUITexture[];
 var ludo1dialoguetree : String[]; 
 var textScrollSpeed:float=20;
-var distanceToChat:int=5;
+var distanceToChat:int=2;
 var camScript : GameObject;
 private var talking:boolean;
 private var textIsScrolling:boolean;
@@ -18,10 +18,14 @@ private var currentLine:int;
 //var webScraperScript : RandomReadFromWebScraper = gameObject.GetComponent(RandomReadFromWebScraper);
 var webScraperScript: RandomReadFromWebScraper;
 webScraperScript = GetComponent("RandomReadFromWebScraper");
-var questNPCScript : QuestNPCConversations;
-questNPCScript = GetComponent("QuestNPCConversations");
+//var questNPCScript : QuestNPCConversations;
+//questNPCScript = GetComponent("QuestNPCConversations");
+var scriptHolder = GameObject.Find("ScriptHolder");
+var questNPCScript: QuestNPCConversations = scriptHolder.GetComponent("QuestNPCConversations");
 var randomLine : String;
 var textLines : List.<String> = new List.<String>(); 
+var guiOn : boolean = false;
+var formPage1 : Texture;
 
 
 function Start(){
@@ -31,14 +35,25 @@ function Start(){
 	// 	textures[i].enabled = false;
 	// }
 
+	print(this.gameObject.name);
+
 	if (this.gameObject.tag == "NonQuestLudo") {
-		textLines = webScraperScript.webScraperLines; // Non-quest NPCs just spout lines from the web scraper
+		textLines.Add(webScraperScript.webScraperLines[Random.Range(0,1800)]); // Non-quest NPCs just spout lines from the web scraper
 	}
 
 	if (this.gameObject.tag == "QuestLudo") {
-		CheckBools(); // Check the current state of the game world before proceeding.
-	}
 
+		if (this.gameObject.name == "Ludo1Cube") {
+			print("I'm in ludo 1 cube");
+			CheckLudo1Bools(); // Check the current state of the game world before proceeding.
+
+		}
+
+		if (this.gameObject.name == "Ludo2Sphere") {
+			print("I'm in ludo 2 sphere");
+			CheckLudo2Bools();
+		}
+	}
 }
 
 
@@ -87,6 +102,18 @@ function Start(){
 	}
 
 	function Update () {
+		//CheckLudo2Bools();
+		//CheckLudo1Bools();
+
+		if (this.gameObject.name == "Ludo1Cube") {
+			CheckLudo1Bools();
+
+		}
+
+		if (this.gameObject.name == "Ludo2Sphere") {
+			CheckLudo2Bools();
+		}
+
 
 		if(talking){
 			if(Input.GetButtonDown("Fire1")){
@@ -110,10 +137,25 @@ function Start(){
 						if (this.gameObject.name == "Ludo1Cube") {
 							questNPCScript.ludo1spokento = true;
 
+							if (questNPCScript.scenarioList[0]) {
+								guiOn = true;
+							}
+
+							CheckLudo1Bools();
+
 						}
 
-						CheckBools();
+						if (this.gameObject.name == "Ludo2Sphere") {
+							questNPCScript.ludo2spokento = true;
+							CheckLudo2Bools();
+						}
 
+						if (this.gameObject.tag == "NonQuestLudo") {
+							textLines.Clear();
+							textLines.Add(webScraperScript.webScraperLines[Random.Range(0,1800)]); // Non-quest NPCs just spout lines from the web scraper
+						}
+
+					
 						// for(var i = 0;i<textures.Length;i++){
 						// 	textures[i].enabled = false;
 						// }
@@ -229,38 +271,61 @@ function Start(){
 	    } 
 	}
 
-function CheckBools () {
+function CheckLudo1Bools () {
 
 	if (questNPCScript.scenarioList[0] && !questNPCScript.ludo1spokento) { // If enterUni is true
-		print("I'm in enter uni. This is my first time speaking");
+		//print("I'm in enter uni. This is my first time speaking"); // DEBUGGING
 		textLines.Clear();
-		//textLines = questNPCScript.ludo1dialoguetree.Concat(questNPCScript.ludo1dialoguetreeenteruni);
-		questNPCScript.ludo1dialoguetree.AddRange(questNPCScript.ludo1dialoguetreeenteruni);
-		textLines = questNPCScript.ludo1dialoguetree;
-		//textLines = questNPCScript.ludo1dialoguetreeenteruni;
-		//textLines = questNPCScript.ludo1dialoguetree[0] + questNPCScript.ludo1dialoguetree[2:5];
+		textLines.Add(questNPCScript.ludo1dialoguetree[0]);
+		textLines.AddRange(questNPCScript.ludo1dialoguetreeenteruni);
+	
 
 
 	}
 
 	else if ((questNPCScript.scenarioList[1] || questNPCScript.scenarioList[2]) && !questNPCScript.ludo1spokento) {
-		//print("I'm not in enter uni. This is my first time speaking");
-		//textLines = questNPCScript.ludo1dialoguetree.Concat(questNPCScript.ludo1dialoguetreerequest);
+		//print("I'm not in enter uni. This is my first time speaking"); // DEBUGGING
 		textLines.Clear();
-		questNPCScript.ludo1dialoguetree.AddRange(questNPCScript.ludo1dialoguetreerequest);
-		textLines = questNPCScript.ludo1dialoguetree;
-		//textLines = questNPCScript.ludo1dialoguetree.Concat(questNPCScript.ludo1dialoguetreerequest);
+		textLines.Add(questNPCScript.ludo1dialoguetree[0]);
+		textLines.AddRange(questNPCScript.ludo1dialoguetreeerequest);
 	}
 
 	if (questNPCScript.scenarioList[0] && questNPCScript.ludo1spokento) {
-		//print("I'm in enter uni. This is my second time speaking");
+		//print("I'm in enter uni. This is my second time speaking"); // DEBUGGING
 		textLines.Clear();
 		textLines.Add(questNPCScript.ludo1spokentree[0]);
 	}
 
 	else if (!questNPCScript.scenarioList[0] && questNPCScript.ludo1spokento ) {
-		//print("I'm not in enter uni. This is my second time speaking");
+		//print("I'm not in enter uni. This is my second time speaking"); //DEBUGGING
 		textLines.Clear();
 		textLines.Add(questNPCScript.ludo1spokentree[1]);
+	}
+}
+
+
+function CheckLudo2Bools () {
+	if (!questNPCScript.ludo1spokento) {
+		//print("Ludo 1 has not been spoken to");
+		textLines.Clear();
+		textLines.AddRange(questNPCScript.ludo2dialoguetree);
+	}
+
+	if (questNPCScript.ludo1spokento) {
+		print("Ludo 1 has been spoken to");
+		textLines.Clear();
+		textLines.AddRange(questNPCScript.ludo2dialoguetree2);
+	}
+
+	if (questNPCScript.ludo1spokento && questNPCScript.ludo2spokento) {
+		textLines.Clear();
+		textLines.AddRange(questNPCScript.ludo2dialoguetree3);
+	}
+}
+
+
+function OnGUI () {
+	if (guiOn) {
+		GUI.DrawTexture(Rect(0,0,2479,3508), formPage1, ScaleMode.ScaleToFit, true, 10.0f);
 	}
 }

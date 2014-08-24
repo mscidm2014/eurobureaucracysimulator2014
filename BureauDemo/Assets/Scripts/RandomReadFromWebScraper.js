@@ -23,10 +23,6 @@ var inputCounter : int = 0;
 
 var mainSkin : GUISkin; 
 
-var helloWorld = "hello world";
-
-var list : String[] = ["Apples", "Bananas", "Oranges", "Lemons"];
-
 var webScraperLines : List.<String>;
 
 function Awake () {
